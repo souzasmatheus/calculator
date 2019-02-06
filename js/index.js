@@ -49,7 +49,6 @@ numbers.forEach((number) => number.addEventListener('click', () => {
 operands.forEach((operand) => operand.addEventListener('click', () => {
     if (sciMode === false) {
         string += operand.innerText
-        console.log(string)
     } else {
         handleScience(sciType)(Number(sciString))
         sciMode = false
@@ -59,11 +58,17 @@ operands.forEach((operand) => operand.addEventListener('click', () => {
 }))
 
 enter.addEventListener('click', () => {
-    console.log(eval(string))
+    if (sciMode === true) {
+        handleScience(sciType)(Number(sciString))
+        sciMode = false
+        sciType = ''
+        console.log(eval(string))
+    } else {
+        console.log(eval(string))
+    }
 })
 
 sciKeys.forEach((key) => key.addEventListener('click', () => {
     sciMode = true
     sciType = key.innerText
-    console.log(sciType)
 }))
