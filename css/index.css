@@ -1,0 +1,24 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    padding: 10px;
+    border: 1px solid black;
+    flex: 1 0 0;
+}
+
+#calc-display {
+    text-align: right;
+}
