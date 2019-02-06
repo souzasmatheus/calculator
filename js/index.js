@@ -10,15 +10,47 @@
 // Variables
 const buttons = document.querySelectorAll('.key')
 const enter = document.querySelector('.key-enter')
+const sciKeys = document.querySelectorAll('.sci-key')
 
-let string = '';
+let string = ''
+let sciMode = false
+let sciType = ''
+
+// General functions
+
+const handleScience = (type) => (num) => {
+    switch(type) {
+        case 'sin':
+            string += Math.sin(num).toFixed(2);
+            break;
+        case 'cos':
+            string += Math.cos(num).toFixed(2);
+            break;
+        case 'tan':
+            string += Math.tan(num).toFixed(2);
+            break;
+        default:
+            return
+    }
+}
 
 // Specific functions
 
 buttons.forEach((button) => button.addEventListener('click', () => {
-    string += button.innerHTML
+    if (sciMode === false) {
+        string += button.innerHTML
+    } else {
+        handleScience(sciType)(Number(button.innerText))
+        sciMode = false
+        sciType = ''
+    }
 }))
 
 enter.addEventListener('click', () => {
     console.log(eval(string))
 })
+
+sciKeys.forEach((key) => key.addEventListener('click', () => {
+    sciMode = true
+    sciType = key.innerText
+}))
