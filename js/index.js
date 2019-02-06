@@ -1,53 +1,24 @@
 /*
-1 - Basic arithmetic
-2 - Decimals
-3 - Takes parenthesis
+1 - Basic arithmetic - DONE
+2 - Decimals - DONE
+3 - Takes parenthesis - DONE
 4 - Basic trigonometry (sin, cos, tan) typed by keyboard or button
 5 - Takes inputs like 1.2 + (5 x 2) / sin(5)
 6 - Nice UI
 */
 
 // Variables
+const buttons = document.querySelectorAll('.key')
+const enter = document.querySelector('.key-enter')
 
-// General functions
-const sum = (...args) => {
-    let result = 0
-
-    for (let i = 0; i < args.length; i++) {
-        result += args[i]
-    }
-
-    return result
-}
-
-const subtract = (...args) => {
-    let result = args[0]
-
-    for (let i = 1; i < args.length; i++) {
-        result -= args[i]
-    }
-
-    return result
-}
-
-const multiply = (...args) => {
-    let result = args[0]
-
-    for (let i = 1; i < args.length; i++) {
-        result = result * args[i]
-    }
-
-    return result
-}
-
-const divide = (...args) => {
-    let result = args[0]
-
-    for (let i = 1; i < args.length; i++) {
-        result = result / args[i]
-    }
-
-    return result
-}
+let string = '';
 
 // Specific functions
+
+buttons.forEach((button) => button.addEventListener('click', () => {
+    string += button.innerHTML
+}))
+
+enter.addEventListener('click', () => {
+    console.log(eval(string))
+})
