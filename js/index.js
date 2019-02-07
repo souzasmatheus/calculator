@@ -7,19 +7,26 @@
 6 - Nice UI
 */
 
-// Variables
+// Variables - DOM
 const numbers = document.querySelectorAll('.num-key')
 const operands = document.querySelectorAll('.operand-key')
-const enter = document.querySelector('.key-enter')
 const sciKeys = document.querySelectorAll('.sci-key')
+const enter = document.querySelector('.key-enter')
+const display = document.querySelector('#calc-display')
 
+// Variables - JS Manipulation
 let string = ''
 let sciMode = false
 let sciType = ''
 let sciString = ''
+let displayValue = ''
+let inside = {
+    sin: 'off',
+    cos: 'off',
+    tan: 'off'
+}
 
 // General functions
-
 const handleScience = (type) => (num) => {
     switch(type) {
         case 'sin':
@@ -36,39 +43,102 @@ const handleScience = (type) => (num) => {
     }
 }
 
-// Specific functions
+const isInsideTrigonometry = (value) => {
+    switch(value) {
+        case 'sin':
+            inside.sin = 'on';
+            break;
+        case 'cos':
+            inside.cos = 'on';
+            break;
+        case 'tan':
+            inside.tan = 'on';
+            break;
+        default:
+            return
+    }
+}
 
+const isOutsideTrigonometry = (value) => {
+    switch(value) {
+        case 'sin':
+            inside.sin = 'off';
+            break;
+        case 'cos':
+            inside.cos = 'off';
+            break;
+        case 'tan':
+            inside.tan = 'off';
+            break;
+        default:
+            return
+    }
+}
+
+const toggleInOut = (value) => {
+    if (inside[value] === 'off') {
+        isInsideTrigonometry(value)
+    } else {
+        isOutsideTrigonometry(value)
+    }
+}
+
+// Specific functions - Exhibition
+const updateDisplay = () => {
+    display.innerHTML = displayValue
+}
+
+// Specific functions - Clicks
 numbers.forEach((number) => number.addEventListener('click', () => {
     if (sciMode === false) {
         string += number.innerText
+        displayValue += number.innerText
+        updateDisplay()
     } else {
         sciString += number.innerText
+        displayValue += number.innerText
+        updateDisplay()
     }
 }))
 
 operands.forEach((operand) => operand.addEventListener('click', () => {
+    const {sin, cos, tan} = inside
+
     if (sciMode === false) {
         string += operand.innerText
-    } else {
-        handleScience(sciType)(Number(sciString))
+        displayValue += operand.innerText
+        updateDisplay()
+    } else if (sin === 'on' || cos === 'on' || tan === 'on') {
+        sciString += operand.innerText
+        displayValue += operand.innerText
+        updateDisplay()
+    }
+}))
+
+sciKeys.forEach((key) => key.addEventListener('click', () => {
+    if (inside[key.innerText] === 'on') {
+        handleScience(sciType)(eval(sciString))
+        toggleInOut(key.innerText)
         sciMode = false
         sciType = ''
-        string += operand.innerText
+        displayValue += `)`
+        updateDisplay()
+    } else {
+        toggleInOut(key.innerText)
+        sciMode = true
+        sciType = key.innerText
+        displayValue += `${key.innerText}(`
+        updateDisplay()
     }
 }))
 
 enter.addEventListener('click', () => {
     if (sciMode === true) {
-        handleScience(sciType)(Number(sciString))
+        handleScience(sciType)(eval(sciString))
         sciMode = false
         sciType = ''
-        console.log(eval(string))
+        console.log(eval(string),displayValue)
     } else {
-        console.log(eval(string))
+        console.log(eval(string),displayValue)
     }
 })
-
-sciKeys.forEach((key) => key.addEventListener('click', () => {
-    sciMode = true
-    sciType = key.innerText
-}))
