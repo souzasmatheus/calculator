@@ -22,3 +22,7 @@ body {
 #calc-display {
     text-align: right;
 }
+
+.red {
+    background-color:rgb(223, 0, 0);
+}

@@ -14,6 +14,9 @@ const sciKeys = document.querySelectorAll('.sci-key')
 const enter = document.querySelector('.key-enter')
 const display = document.querySelector('#calc-display')
 const ce = document.querySelector('.reset-key')
+const sin = document.querySelector('#sin')
+const cos = document.querySelector('#cos')
+const tan = document.querySelector('#tan')
 
 // Variables - JS Manipulation
 let string = ''
@@ -124,12 +127,14 @@ sciKeys.forEach((key) => key.addEventListener('click', () => {
         sciType = ''
         displayValue += `)`
         updateDisplay()
+        key.classList.remove('red')
     } else {
         toggleInOut(key.innerText)
         sciMode = true
         sciType = key.innerText
         displayValue += `${key.innerText}(`
         updateDisplay()
+        key.classList.add('red')
     }
 }))
 
@@ -161,6 +166,9 @@ ce.addEventListener('click', () => {
     }
 
     display.innerHTML = 0
+    sin.classList.remove('red')
+    cos.classList.remove('red')
+    tan.classList.remove('red')
 })
 
 document.addEventListener('keydown', (e) => {
@@ -172,6 +180,7 @@ document.addEventListener('keydown', (e) => {
             sciType = 'sin'
             displayValue += `sin(`
             updateDisplay()
+            sin.classList.add('red')
             break;
         case 67:
             toggleInOut('cos')
@@ -179,6 +188,7 @@ document.addEventListener('keydown', (e) => {
             sciType = 'cos'
             displayValue += `cos(`
             updateDisplay()
+            cos.classList.add('red')
             break;
         case 84:
             toggleInOut('tan')
@@ -186,6 +196,7 @@ document.addEventListener('keydown', (e) => {
             sciType = 'tan'
             displayValue += `tan(`
             updateDisplay()
+            tan.classList.add('red')
             break;
     }
 })
