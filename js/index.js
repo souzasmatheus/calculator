@@ -3,7 +3,7 @@
 2 - Decimals - DONE
 3 - Takes parenthesis - DONE
 4 - Basic trigonometry (sin, cos, tan) typed by keyboard or button
-5 - Takes inputs like 1.2 + (5 x 2) / sin(5)
+5 - Takes inputs like 1.2 + (5 x 2) / sin(5) - DONE
 6 - Nice UI
 */
 
@@ -13,6 +13,7 @@ const operands = document.querySelectorAll('.operand-key')
 const sciKeys = document.querySelectorAll('.sci-key')
 const enter = document.querySelector('.key-enter')
 const display = document.querySelector('#calc-display')
+const ce = document.querySelector('.reset-key')
 
 // Variables - JS Manipulation
 let string = ''
@@ -145,4 +146,19 @@ enter.addEventListener('click', () => {
         updateDisplay()
         string = displayValue
     }
+})
+
+ce.addEventListener('click', () => {
+    string = ''
+    sciMode = false
+    sciType = ''
+    sciString = ''
+    displayValue = ''
+    inside = {
+        sin: 'off',
+        cos: 'off',
+        tan: 'off'
+    }
+
+    display.innerHTML = 0
 })
