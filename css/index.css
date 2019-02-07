@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     height: 100%;
 }
@@ -8,21 +12,68 @@ body {
     align-items: center;
 }
 
-.row {
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
 }
 
-.btn {
+li {
+    background-color: #CACACC;
+    border: 1px solid #7B7B7D;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+.calc-container {
+    background-image: url('../img/circuits.jpg');
+    width: 300px;
+    border: 1px solid #2E6689;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
-    border: 1px solid black;
-    flex: 1 0 0;
+    border-radius: 3px;
 }
 
 #calc-display {
     text-align: right;
+    width: 100%;
+    background-color: #9FAE87;
+    border-style: dotted;
+    border-color: #2E6689;
+    font-size: 2em;
+    color: #2E6689;
+}
+
+.key-group {
+    width: 100%;
+    display: flex;
+}
+
+.calc-keys {
+    flex-grow: 1;
+}
+
+.btn {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 2px;
+    text-align: center;
+    color:  #2E6689;
+}
+
+.key-enter, .reset-key {
+    flex-grow: 2;
+    flex-basis: 0;
 }
 
 .red {
-    background-color:rgb(223, 0, 0);
+    background-color: #FE0000;
+    font-weight: bold;
+    color: black;
 }
