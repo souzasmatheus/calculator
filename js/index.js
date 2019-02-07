@@ -137,8 +137,12 @@ enter.addEventListener('click', () => {
         handleScience(sciType)(eval(sciString))
         sciMode = false
         sciType = ''
-        console.log(eval(string),displayValue)
+        displayValue = eval(string)
+        updateDisplay()
+        string = displayValue
     } else {
-        console.log(eval(string),displayValue)
+        displayValue = eval(string)
+        updateDisplay()
+        string = displayValue
     }
 })
