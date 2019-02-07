@@ -162,3 +162,30 @@ ce.addEventListener('click', () => {
 
     display.innerHTML = 0
 })
+
+document.addEventListener('keydown', (e) => {
+    const keyCode = e.keyCode
+    switch(keyCode) {
+        case 83:
+            toggleInOut('sin')
+            sciMode = true
+            sciType = 'sin'
+            displayValue += `sin(`
+            updateDisplay()
+            break;
+        case 67:
+            toggleInOut('cos')
+            sciMode = true
+            sciType = 'cos'
+            displayValue += `cos(`
+            updateDisplay()
+            break;
+        case 84:
+            toggleInOut('tan')
+            sciMode = true
+            sciType = 'tan'
+            displayValue += `tan(`
+            updateDisplay()
+            break;
+    }
+})
